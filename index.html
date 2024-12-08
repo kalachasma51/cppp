@@ -688,116 +688,6 @@ int main()
 
 
 
-
-
-
-
-11. Write a C++ program for the diagram using Virtual Base class concept. Use your
-own data members and member functions to display student details.Create an array of
-n objects of result class and demonstrate.
-#include <iostream>
-#include<string.h>
-		using namespace std;
-			class Student
-			{
-			protected:
-				char name[20];
-					int usn;
-				public:
-					void read()
-					{
-						cout<<"Enter name"<<endl;
-						cin>>name;
-						cout<<"Enter usn"<<endl;
-						cin>>usn;
-					}
-					void print()
-					{
-						cout<<"name: "<<name<<endl;
-						cout<<"usn: "<<usn<<endl;
-					}
-				};
-class Test:virtual public Student
-{
-protected:
-	int sub1;
-	int sub2;
-public:
-	void getmarks()
-	{
-		cout<<"Enter sub1 marks"<<endl;
-		cin>>sub1;
-		cout<<"Enter sub2 marks"<<endl;
-		cin>>sub2;
-	}
-	void putmarks()
-	{
-		cout<<"sub1: "<<sub1<<endl;
-		cout<<"sub2: "<<sub2<<endl;
-	}
-};
-class Sports :virtual public Student
-{
-protected:
-	int score;
-public:
-	void getscore()
-	{
-		cout<<"Enter score"<<endl;
-		cin>>score;
-	}
-	void putscore()
-	{
-		cout<<"score= "<<score<<endl;
-	}
-};
-class Result:public Test,public Sports
-{
-	int total;
-public:
-	void display()
-	{
-		total=sub1+sub2+score;
-		print();
-		putmarks();
-		putscore();
-		cout<<"total: "<<total<<endl;
-	}
-};
-int main()
-{
-	Result r[10];
-	int n;
-	cout<<"Enter number of students: "<<endl;
-	cin>>n;
-	for(int i=0; i<n; i++)
-	{
-		r[i].read();
-		r[i].getmarks();
-		r[i].getscore();
-	}
-	for(int i=0; i<n; i++)
-	{
-		r[i].display();
-	}
-	return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 12. Create a base class shape to store two double type values. Derive two specific classes
 called triangle and rectangle from the base shape. Add to the base class, a member
 function get_data() to initalize base class data members and another function
@@ -871,4 +761,56 @@ int main()
 		cin>>c;
 	} while(c=='Y'||c=='y');
 	return 0;
+}
+
+13. Write a C++ program to overload binary + and – operator to add and subtract two
+complex numbers. Define relevant data members and member functions for reading
+and displaying the complex objects
+#include <iostream>
+using namespace std;
+class Complex
+{
+int real;
+float imag;
+public:
+void read(int r,float i)
+{
+real=r;
+imag=i;
+}
+void display()
+{
+cout<<real<<"+i"<<imag<<endl;
+}
+Complex operator+(Complex c)
+{
+Complex temp;
+temp.real=real+c.real;
+temp.imag=imag+c.imag;
+return temp;
+}
+Complex operator-(Complex c)
+{
+Complex temp;
+temp.real=real-c.real;
+temp.imag=imag-c.imag;
+return temp;
+}
+};
+int main()
+{
+Complex c1,c2,c3,c4;
+c1.read(1,1.4);
+c2.read(3,2.2);
+cout<<"C1: "<<endl;
+c1.display();
+cout<<"C2: "<<endl;
+c2.display();
+c3=c1+c2;
+cout<<"C3:"<<endl;
+c3.display();
+c4=c2-c1;
+cout<<"C4: "<<endl;
+c4.display();
+return 0;
 }
